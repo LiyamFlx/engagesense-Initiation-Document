@@ -64,6 +64,13 @@
             background-color: #000000;
             color: #ffffff;
         }
+        .project-document {
+            padding: 1rem;
+            margin: 2rem 0;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body>
@@ -72,136 +79,65 @@
     </header>
 
     <div class="container">
-        <h2>Interactive Dataset Insights</h2>
+        <h2>Comprehensive Project Initiation Document</h2>
+        <div class="project-document">
+            <h3>Project Name:</h3>
+            <p>EngageSense - Real-Time Audio Engagement Analyzer</p>
 
-        <div class="chart-container">
-            <h3>Frequency of Engagement Categories</h3>
-            <canvas id="frequencyChart"></canvas>
+            <h3>Project Goals:</h3>
+            <ul>
+                <li>Create a state-of-the-art platform that analyzes and measures real-time audience engagement through advanced AI and analytics.</li>
+                <li>Deliver a seamless, visually appealing user experience with intuitive navigation, informative charts, and interactive features.</li>
+                <li>Provide real-time insights into audience energy, movement, and response, enhancing decision-making for events, marketing, and entertainment industries.</li>
+            </ul>
+
+            <h3>Project Background:</h3>
+            <p>EngageSense is a platform designed to bridge the gap between audience behavior analysis and actionable insights. The need for real-time, precise engagement feedback in events, live performances, and digital media prompted the development of this tool. EngageSense leverages advanced AI algorithms to decode engagement patterns and present them in meaningful visualizations.</p>
+
+            <h3>Project Assumptions:</h3>
+            <ol>
+                <li>Users will provide clean and properly formatted audio inputs for analysis.</li>
+                <li>Real-time engagement metrics will be primarily used for live events.</li>
+                <li>Internet connectivity is available during real-time analysis.</li>
+            </ol>
+
+            <h3>Project Dependencies:</h3>
+            <ul>
+                <li>Integration with modern web audio APIs for live recording and analysis.</li>
+                <li>Use of Chart.js for visual representation of engagement metrics.</li>
+                <li>Availability of AI models capable of analyzing audio signals in real-time.</li>
+            </ul>
+
+            <h3>Project Constraints:</h3>
+            <ol>
+                <li>Limited resources for real-time server-side computation.</li>
+                <li>Accessibility compliance and responsiveness must be ensured across devices.</li>
+                <li>A deadline of 3 months to deploy the MVP.</li>
+            </ol>
+
+            <h3>Project Scope:</h3>
+            <h4>In-Scope:</h4>
+            <ul>
+                <li>Development of the EngageSense platform with real-time audio engagement analysis.</li>
+                <li>Implementation of an intuitive multi-step workflow: Upload, Record, Analyze, and Visualize.</li>
+                <li>Visual dashboards for audience engagement metrics, including trends and insights.</li>
+            </ul>
+            <h4>Out-of-Scope:</h4>
+            <ul>
+                <li>Advanced demographic and emotional sentiment analysis (future phase).</li>
+                <li>Integration with third-party tools for marketing automation.</li>
+            </ul>
+
+            <h3>Business Case:</h3>
+            <p>EngageSense offers a scalable and innovative solution for understanding audience behavior, providing actionable insights for event organizers, marketers, and creators. Its business value lies in:</p>
+            <ol>
+                <li>Enhanced audience experience.</li>
+                <li>Real-time adaptability for events and performances.</li>
+                <li>Competitive differentiation through analytics.</li>
+            </ol>
         </div>
-
-        <div class="chart-container">
-            <h3>Average Engagement Grade per Category</h3>
-            <canvas id="averageGradeChart"></canvas>
-        </div>
-
-        <h2>Detailed Dataset Insights</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Energy Category</th>
-                    <th>Parameter</th>
-                    <th>Engagement Grade (0-10)</th>
-                    <th>% of Final Grade</th>
-                    <th>Weighted Grade</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Physical Engagement</td>
-                    <td>Body Movement</td>
-                    <td>10</td>
-                    <td>0.33</td>
-                    <td>0.033</td>
-                </tr>
-                <tr>
-                    <td>Emotional Engagement</td>
-                    <td>Foot Stomping</td>
-                    <td>4</td>
-                    <td>1.95</td>
-                    <td>0.078</td>
-                </tr>
-                <tr>
-                    <td>Mental Engagement</td>
-                    <td>Hand Movements</td>
-                    <td>1</td>
-                    <td>0.73</td>
-                    <td>0.0073</td>
-                </tr>
-                <tr>
-                    <td>Spiritual Engagement</td>
-                    <td>Dance Patterns</td>
-                    <td>7</td>
-                    <td>2.75</td>
-                    <td>0.1925</td>
-                </tr>
-                <!-- Add more rows dynamically if needed -->
-            </tbody>
-        </table>
 
         <a href="https://liyamflx.github.io/engagesenes111/" class="btn">View Live Version</a>
     </div>
-
-    <script>
-        // Data for Frequency of Engagement Categories
-        const frequencyData = {
-            labels: ["Physical Engagement", "Emotional Engagement", "Mental Engagement", "Spiritual Engagement"],
-            datasets: [{
-                label: "Frequency",
-                data: [10, 8, 6, 6], // Example data, replace with actual counts
-                backgroundColor: "rgba(0, 0, 0, 0.7)",
-                borderColor: "rgba(0, 0, 0, 1)",
-                borderWidth: 1
-            }]
-        };
-
-        // Configuration for Frequency Chart
-        const frequencyConfig = {
-            type: 'bar',
-            data: frequencyData,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    title: {
-                        display: true,
-                        text: 'Frequency of Engagement Categories'
-                    }
-                }
-            }
-        };
-
-        // Data for Average Engagement Grade per Category
-        const gradeData = {
-            labels: ["Physical Engagement", "Emotional Engagement", "Mental Engagement", "Spiritual Engagement"],
-            datasets: [{
-                label: "Average Grade",
-                data: [8.2, 7.1, 5.3, 6.4], // Example data, replace with actual averages
-                backgroundColor: "rgba(0, 0, 0, 0.5)",
-                borderColor: "rgba(0, 0, 0, 1)",
-                borderWidth: 1
-            }]
-        };
-
-        // Configuration for Average Grade Chart
-        const gradeConfig = {
-            type: 'bar',
-            data: gradeData,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    title: {
-                        display: true,
-                        text: 'Average Engagement Grade per Category'
-                    }
-                }
-            }
-        };
-
-        // Render Charts
-        const frequencyChart = new Chart(
-            document.getElementById('frequencyChart'),
-            frequencyConfig
-        );
-
-        const averageGradeChart = new Chart(
-            document.getElementById('averageGradeChart'),
-            gradeConfig
-        );
-    </script>
 </body>
 </html>
