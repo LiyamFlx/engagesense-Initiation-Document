@@ -3,131 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EngageSense - Project Initiation</title>
+    <title>EngageSense Project</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 0;
-            line-height: 1.6;
-            background-color: #f9f9f9;
-            color: #333;
+            background-color: #ffffff;
+            color: #000000;
         }
-
         header {
-            background-color: #007bff;
-            color: #fff;
-            padding: 1rem 2rem;
+            background-color: #000000;
+            color: #ffffff;
             text-align: center;
+            padding: 1rem;
         }
-
         .container {
             max-width: 800px;
             margin: 2rem auto;
-            padding: 1rem;
-            background: #fff;
+            background: #f9f9f9;
+            padding: 1.5rem;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-
         h1, h2, h3 {
-            color: #007bff;
+            color: #000000;
         }
-
-        ul {
-            list-style: disc;
-            margin-left: 1.5rem;
+        .chart-container {
+            margin: 2rem 0;
         }
-
         .btn {
             display: inline-block;
             padding: 0.5rem 1rem;
-            background-color: #007bff;
-            color: #fff;
+            background-color: #000000;
+            color: #ffffff;
             text-decoration: none;
-            border-radius: 4px;
+            border-radius: 5px;
             margin-top: 1rem;
-        }
-
-        .btn:hover {
-            background-color: #0056b3;
-        }
-
-        .section {
-            margin-bottom: 2rem;
-        }
-
-        footer {
             text-align: center;
-            padding: 1rem;
-            background: #f1f1f1;
-            margin-top: 2rem;
         }
-
-        a {
-            color: #007bff;
+        .btn:hover {
+            background-color: #333333;
         }
-
-        a:hover {
-            text-decoration: underline;
+        canvas {
+            background-color: #ffffff;
+            border: 1px solid #000000;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+        th, td {
+            border: 1px solid #000000;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #000000;
+            color: #ffffff;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>EngageSense Project Initiation Document</h1>
+        <h1>EngageSense Project</h1>
     </header>
 
     <div class="container">
-        <div class="section">
-            <h2>1. Project Overview</h2>
-            <p>EngageSense is an advanced engagement-analysis calculator designed to measure and optimize crowd engagement in real-time. Built under the RhythmSense umbrella, EngageSense leverages data-driven insights to revolutionize event management, entertainment experiences, and business outcomes.</p>
+        <h2>Interactive Dataset Insights</h2>
+
+        <div class="chart-container">
+            <h3>Frequency of Engagement Categories</h3>
+            <canvas id="frequencyChart"></canvas>
         </div>
 
-        <div class="section">
-            <h2>2. Objectives</h2>
-            <ul>
-                <li><strong>Primary Goal:</strong> Develop a robust tool to quantify crowd engagement across four core energy sources: physical, emotional, mental, and spiritual.</li>
-                <li><strong>Secondary Goals:</strong>
-                    <ul>
-                        <li>Deliver actionable insights for event organizers and venue managers.</li>
-                        <li>Enhance audience experience through dynamic content and sound adaptation.</li>
-                        <li>Provide predictive analytics for engagement trends.</li>
-                    </ul>
-                </li>
-            </ul>
+        <div class="chart-container">
+            <h3>Average Engagement Grade per Category</h3>
+            <canvas id="averageGradeChart"></canvas>
         </div>
 
-        <div class="section">
-            <h2>3. Key Features</h2>
-            <p>EngageSense includes:</p>
-            <ul>
-                <li>Real-time data analysis with biometric and environmental sensors.</li>
-                <li>Comprehensive engagement metrics across physical, emotional, mental, and spiritual dimensions.</li>
-                <li>Customizable reporting dashboards for actionable insights.</li>
-            </ul>
-        </div>
+        <h2>Detailed Dataset Insights</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Energy Category</th>
+                    <th>Parameter</th>
+                    <th>Engagement Grade (0-10)</th>
+                    <th>% of Final Grade</th>
+                    <th>Weighted Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Physical Engagement</td>
+                    <td>Body Movement</td>
+                    <td>10</td>
+                    <td>0.33</td>
+                    <td>0.033</td>
+                </tr>
+                <tr>
+                    <td>Emotional Engagement</td>
+                    <td>Foot Stomping</td>
+                    <td>4</td>
+                    <td>1.95</td>
+                    <td>0.078</td>
+                </tr>
+                <tr>
+                    <td>Mental Engagement</td>
+                    <td>Hand Movements</td>
+                    <td>1</td>
+                    <td>0.73</td>
+                    <td>0.0073</td>
+                </tr>
+                <tr>
+                    <td>Spiritual Engagement</td>
+                    <td>Dance Patterns</td>
+                    <td>7</td>
+                    <td>2.75</td>
+                    <td>0.1925</td>
+                </tr>
+                <!-- Add more rows dynamically if needed -->
+            </tbody>
+        </table>
 
-        <div class="section">
-            <h2>4. Technical Framework</h2>
-            <p>EngageSense is built using a state-of-the-art technology stack including React.js, Python, and TensorFlow, with cloud deployment options for scalability.</p>
-        </div>
-
-        <div class="section">
-            <h2>5. Next Steps</h2>
-            <p>The next steps for the project include:</p>
-            <ul>
-                <li>Finalizing the development team and resources.</li>
-                <li>Beginning metric validation and prototype design.</li>
-                <li>Engaging early partners for pilot testing.</li>
-            </ul>
-        </div>
-
-        <a href="https://github.com/LiyamFlx/EngageSense" class="btn">View Project Repository</a>
+        <a href="https://liyamflx.github.io/engagesenes111/" class="btn">View Live Version</a>
     </div>
 
-    <footer>
-        <p>&copy; 2024 RhythmSense. All rights reserved.</p>
-    </footer>
+    <script>
+        // Data for Frequency of Engagement Categories
+        const frequencyData = {
+            labels: ["Physical Engagement", "Emotional Engagement", "Mental Engagement", "Spiritual Engagement"],
+            datasets: [{
+                label: "Frequency",
+                data: [10, 8, 6, 6], // Example data, replace with actual counts
+                backgroundColor: "rgba(0, 0, 0, 0.7)",
+                borderColor: "rgba(0, 0, 0, 1)",
+                borderWidth: 1
+            }]
+        };
+
+        // Configuration for Frequency Chart
+        const frequencyConfig = {
+            type: 'bar',
+            data: frequencyData,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Frequency of Engagement Categories'
+                    }
+                }
+            }
+        };
+
+        // Data for Average Engagement Grade per Category
+        const gradeData = {
+            labels: ["Physical Engagement", "Emotional Engagement", "Mental Engagement", "Spiritual Engagement"],
+            datasets: [{
+                label: "Average Grade",
+                data: [8.2, 7.1, 5.3, 6.4], // Example data, replace with actual averages
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                borderColor: "rgba(0, 0, 0, 1)",
+                borderWidth: 1
+            }]
+        };
+
+        // Configuration for Average Grade Chart
+        const gradeConfig = {
+            type: 'bar',
+            data: gradeData,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Average Engagement Grade per Category'
+                    }
+                }
+            }
+        };
+
+        // Render Charts
+        const frequencyChart = new Chart(
+            document.getElementById('frequencyChart'),
+            frequencyConfig
+        );
+
+        const averageGradeChart = new Chart(
+            document.getElementById('averageGradeChart'),
+            gradeConfig
+        );
+    </script>
 </body>
 </html>
