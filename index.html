@@ -3,295 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EngageSense Project</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>EngageSense</title>
     <style>
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #ffffff;
-            color: #000000;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
         }
+
         header {
-            background-color: #000000;
-            color: #ffffff;
+            padding: 20px;
             text-align: center;
-            padding: 1rem;
-        }
-        .container {
-            max-width: 800px;
-            margin: 2rem auto;
-            background: #f9f9f9;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        h1, h2, h3 {
-            color: #000000;
-        }
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-        h2 {
-            font-size: 1.75rem;
-            margin-bottom: 0.5rem;
-        }
-        h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        p, ul, li {
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-        ul {
-            padding-left: 1.5rem;
-        }
-        .section-header {
-            margin-bottom: 1rem;
+            background: #1f1f1f;
+            font-size: 24px;
             font-weight: bold;
-            font-size: 1.25rem;
-            border-bottom: 2px solid #000000;
-            padding-bottom: 0.5rem;
         }
-        .chart-container {
-            margin: 2rem 0;
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            background: #222;
+            position: sticky;
+            top: 0;
         }
-        .btn {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background-color: #000000;
-            color: #ffffff;
+
+        nav a {
+            color: white;
             text-decoration: none;
+            padding: 10px 20px;
             border-radius: 5px;
-            margin-top: 1rem;
+            background-color: #444;
+            transition: background-color 0.3s;
+        }
+
+        nav a.active, nav a:hover {
+            background-color: #0f0;
+        }
+
+        .section {
+            padding: 20px;
+            max-width: 800px;
+            margin: 20px auto;
             text-align: center;
         }
-        .btn:hover {
-            background-color: #333333;
-        }
-        canvas {
-            background-color: #ffffff;
-            border: 1px solid #000000;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-        }
-        th, td {
-            border: 1px solid #000000;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #000000;
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            background: #28a745;
             color: #ffffff;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
         }
-        .project-document {
-            padding: 1rem;
-            margin: 2rem 0;
-            background-color: #ffffff;
-            border: 1px solid #000000;
-            border-radius: 8px;
+
+        button.stop {
+            background: #dc3545;
         }
-        .audio-control {
-            margin-top: 2rem;
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        canvas {
+            display: block;
+            margin: 20px auto;
+            background: #000000;
+            border: 2px solid #ffffff;
+        }
+
+        .metrics {
+            margin-top: 20px;
             text-align: center;
         }
-        #progress-bar {
-            width: 100%;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            margin-top: 1rem;
+
+        .metrics span {
+            font-size: 18px;
+            display: block;
+            margin: 10px 0;
         }
-        #progress-bar div {
-            height: 15px;
-            width: 0%;
-            background-color: #76c7c0;
-            border-radius: 5px;
-        }
-        .help-section {
-            margin-top: 2rem;
-            padding: 1rem;
-            background-color: #f1f1f1;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+            }
+
+            .section {
+                padding: 10px;
+            }
+
+            canvas {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>EngageSense Project</h1>
-    </header>
+    <header>EngageSense Prototype</header>
 
-    <div class="container">
-        <h2 class="section-header">Project Name</h2>
-        <p>EngageSense - Real-Time Audio Engagement Analyzer</p>
+    <nav>
+        <a href="#upload" class="active" onclick="showSection('upload')">Upload</a>
+        <a href="#record" onclick="showSection('record')">Record</a>
+        <a href="#live" onclick="showSection('live')">Live Analysis</a>
+        <a href="#results" onclick="showSection('results')">Results</a>
+    </nav>
 
-        <h2 class="section-header">Goals</h2>
-        <ul>
-            <li>Create a platform for real-time audience engagement analysis using AI.</li>
-            <li>Provide an intuitive interface with clear visuals and interactive features.</li>
-            <li>Deliver actionable insights to improve decision-making in events, marketing, and entertainment.</li>
-        </ul>
-
-        <h2 class="section-header">Real-Time Audio Analysis</h2>
-        <div class="audio-control">
-            <p><strong>Record and Analyze Live Audio:</strong></p>
-            <button id="startBtn" class="btn">Start Recording</button>
-            <button id="stopBtn" class="btn" disabled>Stop Recording</button>
-            <button id="playBtn" class="btn" disabled>Play Audio</button>
-            <p id="status">Status: Idle</p>
-            <div id="progress-bar"><div></div></div>
-        </div>
-
-        <h2 class="section-header">Predictive Engagement Models</h2>
-        <div class="chart-container">
-            <h4>Predicted Engagement Levels</h4>
-            <canvas id="predictionChart"></canvas>
-        </div>
-
-        <h2 class="section-header">Help Section</h2>
-        <div class="help-section">
-            <p><strong>How to Use:</strong></p>
-            <ul>
-                <li>Click "Start Recording" to begin capturing live audio.</li>
-                <li>Click "Stop Recording" to end the recording and analyze the audio.</li>
-                <li>Use "Play Audio" to review the recorded sound.</li>
-                <li>Check the "Predicted Engagement Levels" chart for detailed insights.</li>
-                <li>Ensure your browser has microphone permissions enabled.</li>
-            </ul>
-        </div>
-
-        <a href="https://liyamflx.github.io/engagesenes111/" class="btn">View Live Version</a>
-    </div>
+    <main>
+        <!-- Record Section -->
+        <section id="record" class="section">
+            <h2>Record Audio</h2>
+            <canvas id="waveform" width="800" height="200"></canvas>
+            <div>
+                <button class="start" onclick="startRecording()">Start Recording</button>
+                <button class="stop" onclick="stopRecording()" disabled>Stop Recording</button>
+            </div>
+            <div class="metrics">
+                <span>Pitch: <strong id="pitch">N/A</strong></span>
+                <span>Loudness: <strong id="loudness">N/A</strong></span>
+                <span>Engagement Level: <strong id="engagement">N/A</strong></span>
+            </div>
+        </section>
+    </main>
 
     <script>
-        let audioContext;
-        let mediaRecorder;
-        let audioChunks = [];
-        let audioURL;
-        const startBtn = document.getElementById('startBtn');
-        const stopBtn = document.getElementById('stopBtn');
-        const playBtn = document.getElementById('playBtn');
-        const status = document.getElementById('status');
-        const progressBar = document.getElementById('progress-bar').firstElementChild;
+        let audioCtx, analyser, scriptProcessor, stream;
+        const canvas = document.getElementById('waveform');
+        const canvasCtx = canvas.getContext('2d');
 
-        startBtn.addEventListener('click', async () => {
-            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-                alert('Your browser does not support audio recording.');
-                return;
-            }
+        function startRecording() {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(s => {
+                    stream = s;
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    analyser = audioCtx.createAnalyser();
+                    scriptProcessor = audioCtx.createScriptProcessor(2048, 1, 1);
 
-            status.textContent = 'Status: Recording...';
-            startBtn.disabled = true;
-            stopBtn.disabled = false;
+                    const source = audioCtx.createMediaStreamSource(stream);
+                    source.connect(analyser);
+                    analyser.connect(scriptProcessor);
+                    scriptProcessor.connect(audioCtx.destination);
 
-            audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            mediaRecorder = new MediaRecorder(stream);
+                    scriptProcessor.onaudioprocess = visualizeAndAnalyze;
 
-            mediaRecorder.ondataavailable = (event) => {
-                if (event.data.size > 0) {
-                    audioChunks.push(event.data);
-                }
-            };
+                    document.querySelector('.start').disabled = true;
+                    document.querySelector('.stop').disabled = false;
+                })
+                .catch(error => console.error('Error accessing microphone:', error));
+        }
 
-            mediaRecorder.onstop = async () => {
-                const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-                audioURL = URL.createObjectURL(audioBlob);
-                audioChunks = [];
+        function stopRecording() {
+            stream.getTracks().forEach(track => track.stop());
+            scriptProcessor.disconnect();
+            analyser.disconnect();
+            audioCtx.close();
 
-                progressBar.style.width = '0%';
-                status.textContent = 'Status: Idle';
-                startBtn.disabled = false;
-                stopBtn.disabled = true;
-                playBtn.disabled = false;
-                analyzeAudio(await audioBlob.arrayBuffer());
-            };
+            document.querySelector('.start').disabled = false;
+            document.querySelector('.stop').disabled = true;
+            alert('Recording stopped. Analysis completed.');
+        }
 
-            mediaRecorder.start();
+        function visualizeAndAnalyze(event) {
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+            analyser.getByteTimeDomainData(dataArray);
 
-            // Simulate progress bar
-            let progress = 0;
-            const interval = setInterval(() => {
-                if (progress >= 100 || mediaRecorder.state === 'inactive') {
-                    clearInterval(interval);
+            // Clear canvas
+            canvasCtx.fillStyle = 'black';
+            canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw waveform
+            canvasCtx.lineWidth = 2;
+            canvasCtx.strokeStyle = 'lime';
+            canvasCtx.beginPath();
+
+            let sliceWidth = canvas.width / bufferLength;
+            let x = 0;
+            for (let i = 0; i < bufferLength; i++) {
+                let v = dataArray[i] / 128.0;
+                let y = (v * canvas.height) / 2;
+
+                if (i === 0) {
+                    canvasCtx.moveTo(x, y);
                 } else {
-                    progress += 5;
-                    progressBar.style.width = `${progress}%`;
+                    canvasCtx.lineTo(x, y);
                 }
-            }, 500);
-        });
 
-        stopBtn.addEventListener('click', () => {
-            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-                mediaRecorder.stop();
+                x += sliceWidth;
             }
-        });
+            canvasCtx.lineTo(canvas.width, canvas.height / 2);
+            canvasCtx.stroke();
 
-        playBtn.addEventListener('click', () => {
-            const audio = new Audio(audioURL);
-            audio.play();
-        });
+            // Perform analysis (placeholder values for now)
+            const pitch = Math.random() * 1000 + 100; // Placeholder: Random pitch value
+            const loudness = Math.random() * 100; // Placeholder: Random loudness
+            const engagement = pitch > 500 ? 'High' : 'Moderate'; // Placeholder: Engagement logic
 
-        function analyzeAudio(arrayBuffer) {
-            audioContext.decodeAudioData(arrayBuffer, (audioBuffer) => {
-                const channelData = audioBuffer.getChannelData(0);
-                const energy = channelData.reduce((sum, sample) => sum + sample * sample, 0) / channelData.length;
-
-                // Predictive Engagement Model
-                const predictedEngagement = [
-                    Math.min(10, energy * 50),
-                    Math.min(10, energy * 30),
-                    Math.min(10, energy * 20),
-                    Math.min(10, energy * 25)
-                ];
-
-                renderPredictionChart(predictedEngagement);
-            });
+            document.getElementById('pitch').innerText = `${pitch.toFixed(2)} Hz`;
+            document.getElementById('loudness').innerText = `${loudness.toFixed(2)} dB`;
+            document.getElementById('engagement').innerText = engagement;
         }
 
-        function renderPredictionChart(predictedEngagement) {
-            const predictionData = {
-                labels: ["Physical", "Emotional", "Mental", "Spiritual"],
-                datasets: [{
-                    label: "Predicted Engagement",
-                    data: predictedEngagement,
-                    backgroundColor: "rgba(255, 99, 132, 0.5)",
-                    borderColor: "rgba(255, 99, 132, 1)",
-                    borderWidth: 1
-                }]
-            };
-
-            const predictionConfig = {
-                type: 'bar',
-                data: predictionData,
-                options: {
-                    responsive: true,
-                    animation: {
-                        duration: 1500,
-                        easing: 'easeInOutQuad'
-                    },
-                    plugins: {
-                        legend: {
-                            display: true
-                        },
-                        title: {
-                            display: true,
-                            text: 'Predicted Engagement Levels'
-                        }
-                    }
-                }
-            };
-
-            const ctx = document.getElementById('predictionChart').getContext('2d');
-            new Chart(ctx, predictionConfig);
-        }
     </script>
 </body>
 </html>
