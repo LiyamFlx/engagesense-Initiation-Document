@@ -30,6 +30,33 @@
         h1, h2, h3 {
             color: #000000;
         }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        h2 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        p, ul, li {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        ul {
+            padding-left: 1.5rem;
+        }
+        .section-header {
+            margin-bottom: 1rem;
+            font-weight: bold;
+            font-size: 1.25rem;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 0.5rem;
+        }
         .chart-container {
             margin: 2rem 0;
         }
@@ -71,6 +98,29 @@
             border: 1px solid #000000;
             border-radius: 8px;
         }
+        .audio-control {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        #progress-bar {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+        #progress-bar div {
+            height: 15px;
+            width: 0%;
+            background-color: #76c7c0;
+            border-radius: 5px;
+        }
+        .help-section {
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body>
@@ -79,65 +129,169 @@
     </header>
 
     <div class="container">
-        <h2>Comprehensive Project Initiation Document</h2>
-        <div class="project-document">
-            <h3>Project Name:</h3>
-            <p>EngageSense - Real-Time Audio Engagement Analyzer</p>
+        <h2 class="section-header">Project Name</h2>
+        <p>EngageSense - Real-Time Audio Engagement Analyzer</p>
 
-            <h3>Project Goals:</h3>
+        <h2 class="section-header">Goals</h2>
+        <ul>
+            <li>Create a platform for real-time audience engagement analysis using AI.</li>
+            <li>Provide an intuitive interface with clear visuals and interactive features.</li>
+            <li>Deliver actionable insights to improve decision-making in events, marketing, and entertainment.</li>
+        </ul>
+
+        <h2 class="section-header">Real-Time Audio Analysis</h2>
+        <div class="audio-control">
+            <p><strong>Record and Analyze Live Audio:</strong></p>
+            <button id="startBtn" class="btn">Start Recording</button>
+            <button id="stopBtn" class="btn" disabled>Stop Recording</button>
+            <button id="playBtn" class="btn" disabled>Play Audio</button>
+            <p id="status">Status: Idle</p>
+            <div id="progress-bar"><div></div></div>
+        </div>
+
+        <h2 class="section-header">Predictive Engagement Models</h2>
+        <div class="chart-container">
+            <h4>Predicted Engagement Levels</h4>
+            <canvas id="predictionChart"></canvas>
+        </div>
+
+        <h2 class="section-header">Help Section</h2>
+        <div class="help-section">
+            <p><strong>How to Use:</strong></p>
             <ul>
-                <li>Create a state-of-the-art platform that analyzes and measures real-time audience engagement through advanced AI and analytics.</li>
-                <li>Deliver a seamless, visually appealing user experience with intuitive navigation, informative charts, and interactive features.</li>
-                <li>Provide real-time insights into audience energy, movement, and response, enhancing decision-making for events, marketing, and entertainment industries.</li>
+                <li>Click "Start Recording" to begin capturing live audio.</li>
+                <li>Click "Stop Recording" to end the recording and analyze the audio.</li>
+                <li>Use "Play Audio" to review the recorded sound.</li>
+                <li>Check the "Predicted Engagement Levels" chart for detailed insights.</li>
+                <li>Ensure your browser has microphone permissions enabled.</li>
             </ul>
-
-            <h3>Project Background:</h3>
-            <p>EngageSense is a platform designed to bridge the gap between audience behavior analysis and actionable insights. The need for real-time, precise engagement feedback in events, live performances, and digital media prompted the development of this tool. EngageSense leverages advanced AI algorithms to decode engagement patterns and present them in meaningful visualizations.</p>
-
-            <h3>Project Assumptions:</h3>
-            <ol>
-                <li>Users will provide clean and properly formatted audio inputs for analysis.</li>
-                <li>Real-time engagement metrics will be primarily used for live events.</li>
-                <li>Internet connectivity is available during real-time analysis.</li>
-            </ol>
-
-            <h3>Project Dependencies:</h3>
-            <ul>
-                <li>Integration with modern web audio APIs for live recording and analysis.</li>
-                <li>Use of Chart.js for visual representation of engagement metrics.</li>
-                <li>Availability of AI models capable of analyzing audio signals in real-time.</li>
-            </ul>
-
-            <h3>Project Constraints:</h3>
-            <ol>
-                <li>Limited resources for real-time server-side computation.</li>
-                <li>Accessibility compliance and responsiveness must be ensured across devices.</li>
-                <li>A deadline of 3 months to deploy the MVP.</li>
-            </ol>
-
-            <h3>Project Scope:</h3>
-            <h4>In-Scope:</h4>
-            <ul>
-                <li>Development of the EngageSense platform with real-time audio engagement analysis.</li>
-                <li>Implementation of an intuitive multi-step workflow: Upload, Record, Analyze, and Visualize.</li>
-                <li>Visual dashboards for audience engagement metrics, including trends and insights.</li>
-            </ul>
-            <h4>Out-of-Scope:</h4>
-            <ul>
-                <li>Advanced demographic and emotional sentiment analysis (future phase).</li>
-                <li>Integration with third-party tools for marketing automation.</li>
-            </ul>
-
-            <h3>Business Case:</h3>
-            <p>EngageSense offers a scalable and innovative solution for understanding audience behavior, providing actionable insights for event organizers, marketers, and creators. Its business value lies in:</p>
-            <ol>
-                <li>Enhanced audience experience.</li>
-                <li>Real-time adaptability for events and performances.</li>
-                <li>Competitive differentiation through analytics.</li>
-            </ol>
         </div>
 
         <a href="https://liyamflx.github.io/engagesenes111/" class="btn">View Live Version</a>
     </div>
+
+    <script>
+        let audioContext;
+        let mediaRecorder;
+        let audioChunks = [];
+        let audioURL;
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const playBtn = document.getElementById('playBtn');
+        const status = document.getElementById('status');
+        const progressBar = document.getElementById('progress-bar').firstElementChild;
+
+        startBtn.addEventListener('click', async () => {
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                alert('Your browser does not support audio recording.');
+                return;
+            }
+
+            status.textContent = 'Status: Recording...';
+            startBtn.disabled = true;
+            stopBtn.disabled = false;
+
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            mediaRecorder = new MediaRecorder(stream);
+
+            mediaRecorder.ondataavailable = (event) => {
+                if (event.data.size > 0) {
+                    audioChunks.push(event.data);
+                }
+            };
+
+            mediaRecorder.onstop = async () => {
+                const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                audioURL = URL.createObjectURL(audioBlob);
+                audioChunks = [];
+
+                progressBar.style.width = '0%';
+                status.textContent = 'Status: Idle';
+                startBtn.disabled = false;
+                stopBtn.disabled = true;
+                playBtn.disabled = false;
+                analyzeAudio(await audioBlob.arrayBuffer());
+            };
+
+            mediaRecorder.start();
+
+            // Simulate progress bar
+            let progress = 0;
+            const interval = setInterval(() => {
+                if (progress >= 100 || mediaRecorder.state === 'inactive') {
+                    clearInterval(interval);
+                } else {
+                    progress += 5;
+                    progressBar.style.width = `${progress}%`;
+                }
+            }, 500);
+        });
+
+        stopBtn.addEventListener('click', () => {
+            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                mediaRecorder.stop();
+            }
+        });
+
+        playBtn.addEventListener('click', () => {
+            const audio = new Audio(audioURL);
+            audio.play();
+        });
+
+        function analyzeAudio(arrayBuffer) {
+            audioContext.decodeAudioData(arrayBuffer, (audioBuffer) => {
+                const channelData = audioBuffer.getChannelData(0);
+                const energy = channelData.reduce((sum, sample) => sum + sample * sample, 0) / channelData.length;
+
+                // Predictive Engagement Model
+                const predictedEngagement = [
+                    Math.min(10, energy * 50),
+                    Math.min(10, energy * 30),
+                    Math.min(10, energy * 20),
+                    Math.min(10, energy * 25)
+                ];
+
+                renderPredictionChart(predictedEngagement);
+            });
+        }
+
+        function renderPredictionChart(predictedEngagement) {
+            const predictionData = {
+                labels: ["Physical", "Emotional", "Mental", "Spiritual"],
+                datasets: [{
+                    label: "Predicted Engagement",
+                    data: predictedEngagement,
+                    backgroundColor: "rgba(255, 99, 132, 0.5)",
+                    borderColor: "rgba(255, 99, 132, 1)",
+                    borderWidth: 1
+                }]
+            };
+
+            const predictionConfig = {
+                type: 'bar',
+                data: predictionData,
+                options: {
+                    responsive: true,
+                    animation: {
+                        duration: 1500,
+                        easing: 'easeInOutQuad'
+                    },
+                    plugins: {
+                        legend: {
+                            display: true
+                        },
+                        title: {
+                            display: true,
+                            text: 'Predicted Engagement Levels'
+                        }
+                    }
+                }
+            };
+
+            const ctx = document.getElementById('predictionChart').getContext('2d');
+            new Chart(ctx, predictionConfig);
+        }
+    </script>
 </body>
 </html>
