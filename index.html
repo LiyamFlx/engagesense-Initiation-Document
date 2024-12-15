@@ -3,210 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EngageSense</title>
+    <title>EngageSense Project</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
+            background-color: #ffffff;
+            color: #000000;
         }
-
         header {
-            padding: 20px;
-            text-align: center;
-            background: #1f1f1f;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-around;
-            padding: 10px;
-            background: #222;
-            position: sticky;
-            top: 0;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            background-color: #444;
-            transition: background-color 0.3s;
-        }
-
-        nav a.active, nav a:hover {
-            background-color: #0f0;
-        }
-
-        .section {
-            padding: 20px;
-            max-width: 800px;
-            margin: 20px auto;
-            text-align: center;
-        }
-
-        button {
-            padding: 10px 20px;
-            margin: 10px;
-            border: none;
-            background: #28a745;
+            background-color: #000000;
             color: #ffffff;
-            cursor: pointer;
+            text-align: center;
+            padding: 1rem;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #000000;
+        }
+        .chart-container {
+            margin: 2rem 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #000000;
+            color: #ffffff;
+            text-decoration: none;
             border-radius: 5px;
-            font-size: 16px;
-        }
-
-        button.stop {
-            background: #dc3545;
-        }
-
-        button:hover {
-            opacity: 0.8;
-        }
-
-        canvas {
-            display: block;
-            margin: 20px auto;
-            background: #000000;
-            border: 2px solid #ffffff;
-        }
-
-        .metrics {
-            margin-top: 20px;
+            margin-top: 1rem;
             text-align: center;
         }
-
-        .metrics span {
-            font-size: 18px;
-            display: block;
-            margin: 10px 0;
+        .btn:hover {
+            background-color: #333333;
         }
-
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-            }
-
-            .section {
-                padding: 10px;
-            }
-
-            canvas {
-                width: 100%;
-            }
+        canvas {
+            background-color: #ffffff;
+            border: 1px solid #000000;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+        th, td {
+            border: 1px solid #000000;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #000000;
+            color: #ffffff;
+        }
+        .project-document {
+            padding: 1rem;
+            margin: 2rem 0;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            border-radius: 8px;
         }
     </style>
 </head>
 <body>
-    <header>EngageSense Prototype</header>
+    <header>
+        <h1>EngageSense Project</h1>
+    </header>
 
-    <nav>
-        <a href="#upload" class="active" onclick="showSection('upload')">Upload</a>
-        <a href="#record" onclick="showSection('record')">Record</a>
-        <a href="#live" onclick="showSection('live')">Live Analysis</a>
-        <a href="#results" onclick="showSection('results')">Results</a>
-    </nav>
+    <div class="container">
+        <h2>Comprehensive Project Initiation Document</h2>
+        <div class="project-document">
+            <h3>Project Name:</h3>
+            <p>EngageSense - Real-Time Audio Engagement Analyzer</p>
 
-    <main>
-        <!-- Record Section -->
-        <section id="record" class="section">
-            <h2>Record Audio</h2>
-            <canvas id="waveform" width="800" height="200"></canvas>
-            <div>
-                <button class="start" onclick="startRecording()">Start Recording</button>
-                <button class="stop" onclick="stopRecording()" disabled>Stop Recording</button>
-            </div>
-            <div class="metrics">
-                <span>Pitch: <strong id="pitch">N/A</strong></span>
-                <span>Loudness: <strong id="loudness">N/A</strong></span>
-                <span>Engagement Level: <strong id="engagement">N/A</strong></span>
-            </div>
-        </section>
-    </main>
+            <h3>Project Goals:</h3>
+            <ul>
+                <li>Create a state-of-the-art platform that analyzes and measures real-time audience engagement through advanced AI and analytics.</li>
+                <li>Deliver a seamless, visually appealing user experience with intuitive navigation, informative charts, and interactive features.</li>
+                <li>Provide real-time insights into audience energy, movement, and response, enhancing decision-making for events, marketing, and entertainment industries.</li>
+            </ul>
 
-    <script>
-        let audioCtx, analyser, scriptProcessor, stream;
-        const canvas = document.getElementById('waveform');
-        const canvasCtx = canvas.getContext('2d');
+            <h3>Project Background:</h3>
+            <p>EngageSense is a platform designed to bridge the gap between audience behavior analysis and actionable insights. The need for real-time, precise engagement feedback in events, live performances, and digital media prompted the development of this tool. EngageSense leverages advanced AI algorithms to decode engagement patterns and present them in meaningful visualizations.</p>
 
-        function startRecording() {
-            navigator.mediaDevices.getUserMedia({ audio: true })
-                .then(s => {
-                    stream = s;
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                    analyser = audioCtx.createAnalyser();
-                    scriptProcessor = audioCtx.createScriptProcessor(2048, 1, 1);
+            <h3>Project Assumptions:</h3>
+            <ol>
+                <li>Users will provide clean and properly formatted audio inputs for analysis.</li>
+                <li>Real-time engagement metrics will be primarily used for live events.</li>
+                <li>Internet connectivity is available during real-time analysis.</li>
+            </ol>
 
-                    const source = audioCtx.createMediaStreamSource(stream);
-                    source.connect(analyser);
-                    analyser.connect(scriptProcessor);
-                    scriptProcessor.connect(audioCtx.destination);
+            <h3>Project Dependencies:</h3>
+            <ul>
+                <li>Integration with modern web audio APIs for live recording and analysis.</li>
+                <li>Use of Chart.js for visual representation of engagement metrics.</li>
+                <li>Availability of AI models capable of analyzing audio signals in real-time.</li>
+            </ul>
 
-                    scriptProcessor.onaudioprocess = visualizeAndAnalyze;
+            <h3>Project Constraints:</h3>
+            <ol>
+                <li>Limited resources for real-time server-side computation.</li>
+                <li>Accessibility compliance and responsiveness must be ensured across devices.</li>
+                <li>A deadline of 3 months to deploy the MVP.</li>
+            </ol>
 
-                    document.querySelector('.start').disabled = true;
-                    document.querySelector('.stop').disabled = false;
-                })
-                .catch(error => console.error('Error accessing microphone:', error));
-        }
+            <h3>Project Scope:</h3>
+            <h4>In-Scope:</h4>
+            <ul>
+                <li>Development of the EngageSense platform with real-time audio engagement analysis.</li>
+                <li>Implementation of an intuitive multi-step workflow: Upload, Record, Analyze, and Visualize.</li>
+                <li>Visual dashboards for audience engagement metrics, including trends and insights.</li>
+            </ul>
+            <h4>Out-of-Scope:</h4>
+            <ul>
+                <li>Advanced demographic and emotional sentiment analysis (future phase).</li>
+                <li>Integration with third-party tools for marketing automation.</li>
+            </ul>
 
-        function stopRecording() {
-            stream.getTracks().forEach(track => track.stop());
-            scriptProcessor.disconnect();
-            analyser.disconnect();
-            audioCtx.close();
+            <h3>Business Case:</h3>
+            <p>EngageSense offers a scalable and innovative solution for understanding audience behavior, providing actionable insights for event organizers, marketers, and creators. Its business value lies in:</p>
+            <ol>
+                <li>Enhanced audience experience.</li>
+                <li>Real-time adaptability for events and performances.</li>
+                <li>Competitive differentiation through analytics.</li>
+            </ol>
+        </div>
 
-            document.querySelector('.start').disabled = false;
-            document.querySelector('.stop').disabled = true;
-            alert('Recording stopped. Analysis completed.');
-        }
-
-        function visualizeAndAnalyze(event) {
-            const bufferLength = analyser.frequencyBinCount;
-            const dataArray = new Uint8Array(bufferLength);
-            analyser.getByteTimeDomainData(dataArray);
-
-            // Clear canvas
-            canvasCtx.fillStyle = 'black';
-            canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Draw waveform
-            canvasCtx.lineWidth = 2;
-            canvasCtx.strokeStyle = 'lime';
-            canvasCtx.beginPath();
-
-            let sliceWidth = canvas.width / bufferLength;
-            let x = 0;
-            for (let i = 0; i < bufferLength; i++) {
-                let v = dataArray[i] / 128.0;
-                let y = (v * canvas.height) / 2;
-
-                if (i === 0) {
-                    canvasCtx.moveTo(x, y);
-                } else {
-                    canvasCtx.lineTo(x, y);
-                }
-
-                x += sliceWidth;
-            }
-            canvasCtx.lineTo(canvas.width, canvas.height / 2);
-            canvasCtx.stroke();
-
-            // Perform analysis (placeholder values for now)
-            const pitch = Math.random() * 1000 + 100; // Placeholder: Random pitch value
-            const loudness = Math.random() * 100; // Placeholder: Random loudness
-            const engagement = pitch > 500 ? 'High' : 'Moderate'; // Placeholder: Engagement logic
-
-            document.getElementById('pitch').innerText = `${pitch.toFixed(2)} Hz`;
-            document.getElementById('loudness').innerText = `${loudness.toFixed(2)} dB`;
-            document.getElementById('engagement').innerText = engagement;
-        }
-
-    </script>
+        <a href="https://liyamflx.github.io/engagesenes111/" class="btn">View Live Version</a>
+    </div>
 </body>
 </html>
